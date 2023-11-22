@@ -55,4 +55,19 @@ describe('AppComponent', () => {
     expect(dummy).toBeTruthy();
     expect(dummy!.innerHTML).toContain("dummy works!");
   });
+
+  it('should create and render dummy in overlay with dirty hack', async () => {
+    const viaPortal = fixture.debugElement.query(By.css('[data-test="via-portal"]'));
+    expect(viaPortal).toBeTruthy();
+
+    viaPortal.nativeElement.click();
+    fixture.detectChanges();
+
+    await new Promise(resolve => setTimeout(resolve, 0))
+
+    const dummy = document.querySelector("app-dummy");
+    expect(dummy).toBeTruthy();
+    expect(dummy!.innerHTML).toContain("dummy works!");
+  });
+
 });
